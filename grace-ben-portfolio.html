@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grace Ben — Content Writer & Digital Strategist</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0e0e0e;
+    --cream: #f5f0e8;
+    --warm: #e8dcc8;
+    --accent: #c9602b;
+    --accent2: #3d6b4f;
+    --muted: #7a7165;
+    --gold: #c4a43a;
+    --light-ink: #2a2420;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease, background 0.2s;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.4s ease, opacity 0.3s;
+    transform: translate(-50%, -50%);
+    opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 3.5rem;
+    mix-blend-mode: multiply;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 7rem 3.5rem 5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--accent);
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    font-weight: 900;
+    line-height: 1.0;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-descriptor {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 1.8vw, 1.5rem);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--muted);
+    margin: 1.5rem 0 3rem;
+    max-width: 420px;
+    line-height: 1.5;
+  }
+  .hero-cta-group {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 0.9rem 2.2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: none;
+    transition: background 0.25s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+  .btn-ghost {
+    color: var(--ink);
+    padding: 0.9rem 2.2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1.5px solid var(--ink);
+    cursor: none;
+    transition: border-color 0.25s, color 0.25s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-panel {
+    position: absolute;
+    inset: 0;
+    background: var(--ink);
+  }
+  .hero-texture {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(255,255,255,0.015) 40px,
+        rgba(255,255,255,0.015) 41px
+      );
+  }
+  .hero-stats {
+    position: absolute;
+    bottom: 5rem;
+    left: 3rem;
+    right: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    z-index: 3;
+  }
+  .stat-item {}
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1;
+  }
+  .stat-number span { color: var(--accent); }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.45);
+    margin-top: 0.4rem;
+  }
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 3.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    animation: hint-bounce 2.5s ease-in-out infinite;
+  }
+  .scroll-line {
+    width: 40px; height: 1px;
+    background: var(--muted);
+    animation: scroll-grow 2.5s ease-in-out infinite;
+  }
+  @keyframes hint-bounce {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+  @keyframes scroll-grow {
+    0%, 100% { width: 20px; }
+    50% { width: 50px; }
+  }
+
+  /* Large decorative text */
+  .hero-deco {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    font-family: 'Playfair Display', serif;
+    font-size: 11rem;
+    font-weight: 900;
+    font-style: italic;
+    color: rgba(255,255,255,0.03);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -0.02em;
+  }
+
+  /* MARQUEE STRIP */
+  .marquee-strip {
+    background: var(--accent);
+    padding: 0.9rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-block;
+    animation: marquee 22s linear infinite;
+  }
+  .marquee-inner span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin: 0 2.5rem;
+  }
+  .marquee-inner span.dot {
+    color: rgba(245,240,232,0.5);
+    font-size: 0.5rem;
+    vertical-align: middle;
+    margin: 0 0.5rem;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SECTIONS */
+  section { padding: 8rem 3.5rem; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .section-label::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--accent);
+  }
+
+  /* SERVICES */
+  #services { background: var(--cream); }
+  .services-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 5rem;
+    align-items: end;
+  }
+  .services-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .services-title em { font-style: italic; color: var(--accent); }
+  .services-intro {
+    color: var(--muted);
+    line-height: 1.75;
+    font-size: 1.02rem;
+    font-weight: 300;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid rgba(14,14,14,0.12);
+  }
+  .service-card {
+    padding: 3rem 2.5rem;
+    border-right: 1px solid rgba(14,14,14,0.12);
+    border-bottom: 1px solid rgba(14,14,14,0.12);
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card:hover {
+    background: var(--ink);
+  }
+  .service-card:hover .service-title,
+  .service-card:hover .service-desc,
+  .service-card:hover .service-num { color: var(--cream); }
+  .service-card:hover .service-arrow { color: var(--accent); }
+  .service-card:last-child { border-right: none; }
+  .service-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    transition: color 0.3s;
+  }
+  .service-icon {
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+  .service-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    transition: color 0.3s;
+  }
+  .service-desc {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--muted);
+    font-weight: 300;
+    transition: color 0.3s;
+  }
+  .service-arrow {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    font-size: 1.4rem;
+    color: var(--warm);
+    transition: color 0.3s, transform 0.3s;
+  }
+  .service-card:hover .service-arrow { transform: translate(4px, -4px); }
+
+  /* WORK */
+  #work { background: var(--ink); }
+  #work .section-label { color: var(--gold); }
+  #work .section-label::before { background: var(--gold); }
+  .work-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
+    font-weight: 900;
+    color: var(--cream);
+    margin-bottom: 4rem;
+    line-height: 1.1;
+  }
+  .work-title em { font-style: italic; color: var(--gold); }
+
+  .work-grid { display: grid; gap: 2px; }
+  .work-item {
+    display: grid;
+    grid-template-columns: 200px 1fr auto;
+    align-items: center;
+    padding: 2.2rem 0;
+    border-bottom: 1px solid rgba(245,240,232,0.08);
+    gap: 3rem;
+    transition: padding-left 0.3s;
+    cursor: none;
+  }
+  .work-item:hover { padding-left: 1.5rem; }
+  .work-item:hover .work-company { color: var(--gold); }
+  .work-company {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--cream);
+    transition: color 0.3s;
+  }
+  .work-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    margin-top: 0.3rem;
+  }
+  .work-desc {
+    font-size: 0.9rem;
+    color: rgba(245,240,232,0.6);
+    line-height: 1.65;
+    font-weight: 300;
+    max-width: 500px;
+  }
+  .work-impact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.4rem;
+  }
+  .impact-badge {
+    background: rgba(201,96,43,0.15);
+    border: 1px solid rgba(201,96,43,0.3);
+    color: var(--accent);
+    padding: 0.35rem 0.8rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+  .impact-badge.green {
+    background: rgba(61,107,79,0.2);
+    border-color: rgba(61,107,79,0.4);
+    color: #6aab80;
+  }
+
+  /* ABOUT */
+  #about {
+    background: var(--warm);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  .about-left {}
+  .about-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    color: var(--ink);
+  }
+  .about-title em { font-style: italic; color: var(--accent2); }
+  .about-text {
+    color: var(--light-ink);
+    font-size: 1rem;
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+  .about-right {
+    display: grid;
+    gap: 1rem;
+  }
+  .skill-pill-group { margin-bottom: 1.5rem; }
+  .skill-group-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.7rem;
+  }
+  .skills-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .pill {
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    border: 1px solid;
+    transition: background 0.2s, color 0.2s;
+  }
+  .pill-ink {
+    border-color: var(--ink);
+    color: var(--ink);
+    background: transparent;
+  }
+  .pill-ink:hover { background: var(--ink); color: var(--cream); }
+  .pill-accent {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: transparent;
+  }
+  .pill-accent:hover { background: var(--accent); color: var(--cream); }
+  .pill-green {
+    border-color: var(--accent2);
+    color: var(--accent2);
+    background: transparent;
+  }
+  .pill-green:hover { background: var(--accent2); color: var(--cream); }
+
+  .cert-list {
+    margin-top: 2rem;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .cert-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .cert-item::before {
+    content: '✓';
+    color: var(--accent2);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  /* TESTIMONIAL / QUOTE SECTION */
+  .quote-section {
+    background: var(--accent);
+    padding: 7rem 3.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 12rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.1);
+    line-height: 0.5;
+    position: absolute;
+    top: 2rem;
+    left: 3.5rem;
+  }
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--cream);
+    max-width: 780px;
+    margin: 0 auto 2rem;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+  }
+  .quote-attr {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.6);
+  }
+
+  /* CONTACT */
+  #contact { background: var(--cream); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .contact-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  .contact-title em { font-style: italic; color: var(--accent); }
+  .contact-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.75;
+    font-weight: 300;
+    margin-bottom: 3rem;
+  }
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.95rem;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--accent); }
+  .contact-link-icon {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(14,14,14,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .contact-link:hover .contact-link-icon {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  .contact-form-side {}
+  .form-row { margin-bottom: 1.5rem; }
+  .form-row label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .form-row input,
+  .form-row textarea,
+  .form-row select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1.5px solid rgba(14,14,14,0.2);
+    padding: 0.7rem 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+    cursor: none;
+  }
+  .form-row input:focus,
+  .form-row textarea:focus,
+  .form-row select:focus { border-color: var(--accent); }
+  .form-row textarea { resize: vertical; min-height: 100px; }
+  .form-row select { -webkit-appearance: none; background-image: none; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    padding: 3rem 3.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--cream);
+  }
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: rgba(245,240,232,0.35);
+  }
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ENTRANCE ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .fade-up-delay-1 { transition-delay: 0.1s; }
+  .fade-up-delay-2 { transition-delay: 0.22s; }
+  .fade-up-delay-3 { transition-delay: 0.34s; }
+  .fade-up-delay-4 { transition-delay: 0.46s; }
+  .fade-up-delay-5 { transition-delay: 0.58s; }
+  .fade-up-delay-6 { transition-delay: 0.7s; }
+
+  /* HERO ANIMATION */
+  .hero-left > * {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: hero-entrance 0.8s ease forwards;
+  }
+  .hero-left > *:nth-child(1) { animation-delay: 0.3s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.5s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.7s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.9s; }
+  @keyframes hero-entrance {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-stats .stat-item {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: hero-entrance 0.8s ease forwards;
+  }
+  .hero-stats .stat-item:nth-child(1) { animation-delay: 1.1s; }
+  .hero-stats .stat-item:nth-child(2) { animation-delay: 1.25s; }
+  .hero-stats .stat-item:nth-child(3) { animation-delay: 1.4s; }
+  .hero-stats .stat-item:nth-child(4) { animation-delay: 1.55s; }
+
+  /* LINE DRAW */
+  .line-draw {
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    width: 0;
+    transition: width 1.2s ease;
+  }
+  .line-draw.visible { width: 100%; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 7rem 1.5rem 3rem; }
+    .hero-right { min-height: 55vw; }
+    .hero-stats { bottom: 2rem; left: 1.5rem; right: 1.5rem; }
+    section { padding: 5rem 1.5rem; }
+    #about { grid-template-columns: 1fr; gap: 3rem; }
+    .services-header { grid-template-columns: 1fr; gap: 2rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card { border-right: none; }
+    .work-item { grid-template-columns: 1fr; gap: 0.8rem; }
+    .work-impact { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Grace Ben</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-tag">Available for projects · Uyo, Nigeria</div>
+    <h1 class="hero-name">
+      Grace<br><em>Ben</em>
+    </h1>
+    <p class="hero-descriptor">
+      Content writer. Social media strategist. Technical storyteller. I turn complex ideas into content that connects.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#work" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-ghost">Let's Collaborate</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-bg-panel"></div>
+    <div class="hero-texture"></div>
+    <div class="hero-deco">Stories</div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">3<span>+</span></div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">6<span>+</span></div>
+        <div class="stat-label">Brands Served</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1.5<span>k</span></div>
+        <div class="stat-label">Conference Attendees</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">60<span>%</span></div>
+        <div class="stat-label">Avg. Engagement Lift</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    Scroll to explore
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>Content Writing</span><span class="dot">◆</span>
+    <span>Social Media Strategy</span><span class="dot">◆</span>
+    <span>Technical Documentation</span><span class="dot">◆</span>
+    <span>Web3 &amp; DeFi Content</span><span class="dot">◆</span>
+    <span>Video Content</span><span class="dot">◆</span>
+    <span>Brand Storytelling</span><span class="dot">◆</span>
+    <span>Executive Support</span><span class="dot">◆</span>
+    <span>SEO Optimization</span><span class="dot">◆</span>
+    <span>Content Writing</span><span class="dot">◆</span>
+    <span>Social Media Strategy</span><span class="dot">◆</span>
+    <span>Technical Documentation</span><span class="dot">◆</span>
+    <span>Web3 &amp; DeFi Content</span><span class="dot">◆</span>
+    <span>Video Content</span><span class="dot">◆</span>
+    <span>Brand Storytelling</span><span class="dot">◆</span>
+    <span>Executive Support</span><span class="dot">◆</span>
+    <span>SEO Optimization</span><span class="dot">◆</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header fade-up">
+    <div>
+      <div class="section-label">What I Do</div>
+      <h2 class="services-title">Words that <em>work</em><br>for your brand</h2>
+    </div>
+    <p class="services-intro">
+      With over three years of experience across tech, fintech, Web3, and telecommunications, I craft content that does more than fill space — it drives growth, builds community, and makes complex ideas approachable.
+    </p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-up fade-up-delay-1">
+      <div class="service-num">01</div>
+      <span class="service-icon">✍️</span>
+      <div class="service-title">Content Writing & Strategy</div>
+      <p class="service-desc">Articles, blog posts, product copy, and campaign content crafted to educate, convert, and engage. I write with your brand voice and your audience's needs in mind.</p>
+      <div class="service-arrow">→</div>
+    </div>
+    <div class="service-card fade-up fade-up-delay-2">
+      <div class="service-num">02</div>
+      <span class="service-icon">📱</span>
+      <div class="service-title">Social Media Management</div>
+      <p class="service-desc">End-to-end social strategy: content calendars, post creation, community engagement, analytics tracking, and performance optimization across Instagram, TikTok, X, and more.</p>
+      <div class="service-arrow">→</div>
+    </div>
+    <div class="service-card fade-up fade-up-delay-3">
+      <div class="service-num">03</div>
+      <span class="service-icon">🛠️</span>
+      <div class="service-title">Technical Writing</div>
+      <p class="service-desc">User guides, onboarding documentation, FAQs, and explainers that simplify technical products for everyday users. Specialist in Web3, DeFi, and fintech documentation.</p>
+      <div class="service-arrow">→</div>
+    </div>
+    <div class="service-card fade-up fade-up-delay-4">
+      <div class="service-num">04</div>
+      <span class="service-icon">🎬</span>
+      <div class="service-title">Video Content & Editing</div>
+      <p class="service-desc">Short-form video strategy, production, and editing for TikTok and Instagram Reels. From concept to final cut, including influencer collaboration management.</p>
+      <div class="service-arrow">→</div>
+    </div>
+    <div class="service-card fade-up fade-up-delay-5">
+      <div class="service-num">05</div>
+      <span class="service-icon">🌐</span>
+      <div class="service-title">Web3 & DeFi Content</div>
+      <p class="service-desc">Educational content that demystifies blockchain, DeFi protocols, and emerging technologies for both technical and non-technical audiences. Community-first storytelling.</p>
+      <div class="service-arrow">→</div>
+    </div>
+    <div class="service-card fade-up fade-up-delay-6">
+      <div class="service-num">06</div>
+      <span class="service-icon">📊</span>
+      <div class="service-title">Executive & Project Support</div>
+      <p class="service-desc">Research, communications, scheduling, and project coordination for busy executives. Organized, proactive, and adaptable to your workflow and tools.</p>
+      <div class="service-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-label fade-up">Selected Work</div>
+  <h2 class="work-title fade-up">Brands I've <em>grown</em><br>with my words</h2>
+
+  <div class="work-grid">
+    <div class="work-item fade-up">
+      <div>
+        <div class="work-company">DataUp Technologies</div>
+        <div class="work-role">Content Writer · Telecom</div>
+      </div>
+      <div class="work-desc">
+        Authored educational and promotional articles for data, airtime, and TV subscription services. Created content aligned with product launches and collaborated with design teams for brand consistency.
+      </div>
+      <div class="work-impact">
+        <span class="impact-badge">↑ App User Growth</span>
+        <span class="impact-badge green">↑ Social Followers</span>
+      </div>
+    </div>
+
+    <div class="work-item fade-up fade-up-delay-1">
+      <div>
+        <div class="work-company">For The Love of DeFi</div>
+        <div class="work-role">Content Curator · Web3</div>
+      </div>
+      <div class="work-desc">
+        Led content strategy for the INNOVATE Conference and created research-driven educational material on blockchain and DeFi protocols for a growing Web3 community.
+      </div>
+      <div class="work-impact">
+        <span class="impact-badge">1,500+ Attendees</span>
+        <span class="impact-badge green">Nov 2022 – Mar 2025</span>
+      </div>
+    </div>
+
+    <div class="work-item fade-up fade-up-delay-2">
+      <div>
+        <div class="work-company">TinaPay</div>
+        <div class="work-role">Social Media Manager · Fintech</div>
+      </div>
+      <div class="work-desc">
+        Managed full social media strategy across platforms — posting schedules, community engagement, analytics-driven optimization — building consistent brand loyalty.
+      </div>
+      <div class="work-impact">
+        <span class="impact-badge">↑ Brand Loyalty</span>
+        <span class="impact-badge green">Data-Driven Strategy</span>
+      </div>
+    </div>
+
+    <div class="work-item fade-up fade-up-delay-3">
+      <div>
+        <div class="work-company">Sharperly</div>
+        <div class="work-role">Video Creator & Editor · Finance</div>
+      </div>
+      <div class="work-desc">
+        Developed short-form video strategy, produced TikTok and Instagram content, and managed influencer collaborations for a finance and immigration remittance brand.
+      </div>
+      <div class="work-impact">
+        <span class="impact-badge">+60% Engagement</span>
+        <span class="impact-badge green">0 → 250+ TikTok</span>
+      </div>
+    </div>
+
+    <div class="work-item fade-up fade-up-delay-4">
+      <div>
+        <div class="work-company">Protis Studio</div>
+        <div class="work-role">Content Writer · Productivity</div>
+      </div>
+      <div class="work-desc">
+        Created Instagram content around productivity and work optimization, collaborating with creative teams to maintain cohesive brand goals and visual storytelling.
+      </div>
+      <div class="work-impact">
+        <span class="impact-badge">+58% Brand Awareness</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE STRIP -->
+<div class="quote-section fade-up">
+  <div class="quote-mark">"</div>
+  <p class="quote-text">
+    Great content isn't about writing more — it's about saying the right thing, to the right people, at the right moment.
+  </p>
+  <div class="quote-attr">— Grace Ben's Content Philosophy</div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left fade-up">
+    <div class="section-label">About Me</div>
+    <h2 class="about-title">Analytical mind.<br><em>Creative heart.</em></h2>
+    <p class="about-text">
+      I'm Grace — a content and communications professional based in Uyo, Nigeria, with a background in Computer Science Education. That combination gives me a rare blend: the analytical structure of a technologist and the storytelling instincts of a creative.
+    </p>
+    <p class="about-text">
+      Over three years, I've worked across telecommunications, fintech, Web3, and productivity brands — writing content that educates users, grows audiences, and supports business goals. I thrive in fast-paced environments and care deeply about measurable impact.
+    </p>
+    <p class="about-text">
+      When I'm not crafting content, you'll find me creating, photographing, and networking within the tech and creative communities I love.
+    </p>
+
+    <div class="cert-list fade-up fade-up-delay-1">
+      <div class="cert-item">SEO Certification — HubSpot Academy</div>
+      <div class="cert-item">Content Marketing — HubSpot Academy</div>
+      <div class="cert-item">Social Media Marketing — FutureLearn</div>
+      <div class="cert-item">Product Management — Africa Agility</div>
+      <div class="cert-item">UI/UX Design Basics — Great Learning</div>
+    </div>
+  </div>
+
+  <div class="about-right fade-up fade-up-delay-2">
+    <div class="skill-pill-group">
+      <div class="skill-group-label">Content & Writing</div>
+      <div class="skills-pills">
+        <span class="pill pill-ink">Content Writing</span>
+        <span class="pill pill-ink">Copywriting</span>
+        <span class="pill pill-ink">Technical Writing</span>
+        <span class="pill pill-ink">Storytelling</span>
+        <span class="pill pill-ink">Blog Articles</span>
+      </div>
+    </div>
+    <div class="skill-pill-group">
+      <div class="skill-group-label">Social & Digital</div>
+      <div class="skills-pills">
+        <span class="pill pill-accent">Social Media Strategy</span>
+        <span class="pill pill-accent">Video Editing</span>
+        <span class="pill pill-accent">SEO</span>
+        <span class="pill pill-accent">Analytics</span>
+        <span class="pill pill-accent">Influencer Management</span>
+      </div>
+    </div>
+    <div class="skill-pill-group">
+      <div class="skill-group-label">Tools & Platforms</div>
+      <div class="skills-pills">
+        <span class="pill pill-green">Notion</span>
+        <span class="pill pill-green">Canva</span>
+        <span class="pill pill-green">CapCut</span>
+        <span class="pill pill-green">HubSpot</span>
+        <span class="pill pill-green">Google Analytics</span>
+        <span class="pill pill-green">Trello</span>
+      </div>
+    </div>
+    <div class="skill-pill-group">
+      <div class="skill-group-label">Industries</div>
+      <div class="skills-pills">
+        <span class="pill pill-ink">Fintech</span>
+        <span class="pill pill-ink">Web3 / DeFi</span>
+        <span class="pill pill-ink">Telecom</span>
+        <span class="pill pill-ink">Productivity</span>
+        <span class="pill pill-ink">Finance & Remittance</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="fade-up">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="contact-title">Let's create<br>something <em>great</em></h2>
+      <p class="contact-sub">
+        Open to freelance projects, full-time roles, and collaborative opportunities. If you need a content partner who delivers results — let's talk.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:bengrace23@gmail.com" class="contact-link">
+          <div class="contact-link-icon">✉</div>
+          bengrace23@gmail.com
+        </a>
+        <a href="tel:+2347083928884" class="contact-link">
+          <div class="contact-link-icon">☎</div>
+          +234 708 3928 884
+        </a>
+        <a href="https://linkedin.com/in/grace-ben" target="_blank" class="contact-link">
+          <div class="contact-link-icon">in</div>
+          linkedin.com/in/grace-ben
+        </a>
+        <a href="#" class="contact-link">
+          <div class="contact-link-icon">📍</div>
+          Uyo, Akwa Ibom State, Nigeria
+        </a>
+      </div>
+    </div>
+    <div class="contact-form-side fade-up fade-up-delay-2">
+      <div class="form-row">
+        <label>Your Name</label>
+        <input type="text" placeholder="Jane Smith">
+      </div>
+      <div class="form-row">
+        <label>Email Address</label>
+        <input type="email" placeholder="jane@company.com">
+      </div>
+      <div class="form-row">
+        <label>Service Needed</label>
+        <select>
+          <option value="">Select a service…</option>
+          <option>Content Writing & Strategy</option>
+          <option>Social Media Management</option>
+          <option>Technical Writing</option>
+          <option>Video Content & Editing</option>
+          <option>Web3 / DeFi Content</option>
+          <option>Executive Support</option>
+          <option>Multiple Services</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Tell me about your project</label>
+        <textarea placeholder="Describe your project, goals, and timeline…"></textarea>
+      </div>
+      <button class="btn-primary" style="width:100%;text-align:center;padding:1.1rem;" onclick="alert('Thank you! Grace will be in touch soon.')">
+        Send Message →
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Grace Ben</div>
+  <div class="footer-copy">© 2025 Grace Ben · Content Writer & Digital Strategist</div>
+  <ul class="footer-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="mailto:bengrace23@gmail.com">Email</a></li>
+  </ul>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+  });
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.1;
+    ringY += (mouseY - ringY) * 0.1;
+    ring.style.left = ringX + 'px';
+    ring.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+  document.querySelectorAll('a, button, .service-card, .work-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+      ring.style.opacity = '0.2';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      ring.style.opacity = '0.5';
+    });
+  });
+
+  // Intersection observer for fade-up
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up, .line-draw').forEach(el => observer.observe(el));
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>
